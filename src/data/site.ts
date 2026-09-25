@@ -59,7 +59,7 @@ export const socials: { id: SocialId; label: string; handle: string; href: strin
     id: 'linkedin',
     label: 'LinkedIn',
     handle: 'Skaldforge Studio',
-    href: 'https://www.linkedin.com/in/skaldforge-studio-25bb25398/',
+    href: 'https://www.linkedin.com/company/skaldforge/posts/',
   },
 ];
 
