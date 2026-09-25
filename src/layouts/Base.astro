@@ -6,7 +6,7 @@ import '../styles/global.css';
 
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { site } from '../data/site';
+import { site, socials, steam } from '../data/site';
 import { url, asset } from '../lib/url';
 
 interface Props {
@@ -31,6 +31,7 @@ const orgSchema = {
   url: new URL(url('/'), Astro.site).href,
   logo: new URL(asset('icon-512.png'), Astro.site).href,
   description: site.description,
+  sameAs: socials.map((s) => s.href),
 };
 
 const gameSchema = {
@@ -42,6 +43,7 @@ const gameSchema = {
   playMode: 'MultiPlayer',
   publisher: { '@type': 'Organization', name: site.studio },
   author: { '@type': 'Organization', name: site.studio },
+  sameAs: [steam.href],
 };
 ---
 

@@ -205,6 +205,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 .btn svg { inline-size: 0.6rem; flex: none; }
+/* Brand glyphs (Steam etc.) read at text size rather than as a small arrow. */
+.btn--icon svg { inline-size: 1.1em; block-size: 1.1em; }
 
 /* Text link with an animated gold underline. */
 .link-arrow {

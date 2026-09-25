@@ -1,7 +1,9 @@
 ---
-import { nav, site } from '../data/site';
+import { nav, site, steam } from '../data/site';
 import { url, isCurrent } from '../lib/url';
 import Wordmark from './Wordmark.astro';
+import SocialIcon from './SocialIcon.astro';
+import SocialLinks from './SocialLinks.astro';
 
 interface Props {
   /** Hero pages start with the nav transparent over the media. */
@@ -31,9 +33,10 @@ const pathname = Astro.url.pathname;
           </li>
         ))}
       </ul>
-      <a class="nav__cta" href={url('/mythbound#trailer')}>
-        <svg viewBox="0 0 12 14" aria-hidden="true" focusable="false"><path d="M12 7 0 14V0z" fill="currentColor"/></svg>
-        Watch Trailer
+      <a class="nav__cta" href={steam.href} target="_blank" rel="noopener noreferrer">
+        <SocialIcon id="steam" />
+        Wishlist<span class="nav__cta-long"> on Steam</span>
+        <span class="visually-hidden"> (opens in a new tab)</span>
       </a>
     </nav>
 
@@ -68,10 +71,14 @@ const pathname = Astro.url.pathname;
         ))}
       </ul>
     </nav>
-    <a class="nav__panel-cta" href={url('/mythbound#trailer')}>
-      <svg viewBox="0 0 12 14" aria-hidden="true" focusable="false"><path d="M12 7 0 14V0z" fill="currentColor"/></svg>
-      Watch Trailer
-    </a>
+    <div class="nav__panel-foot">
+      <a class="nav__panel-cta" href={steam.href} target="_blank" rel="noopener noreferrer">
+        <SocialIcon id="steam" />
+        Wishlist on Steam
+        <span class="visually-hidden"> (opens in a new tab)</span>
+      </a>
+      <SocialLinks align="center" />
+    </div>
   </div>
 </header>
 
@@ -184,6 +191,7 @@ const pathname = Astro.url.pathname;
       font-weight: 600;
       letter-spacing: var(--tr-label);
       text-transform: uppercase;
+      white-space: nowrap;
       color: var(--c-gold-300);
       border: 1px solid color-mix(in oklab, var(--c-gold-500) 45%, transparent);
       border-radius: var(--r-md);
@@ -192,7 +200,19 @@ const pathname = Astro.url.pathname;
         color var(--d-mid) var(--e-out),
         border-color var(--d-mid) var(--e-out);
     }
-    .nav__cta svg { inline-size: 0.55rem; flex: none; }
+    /* The glyph is a child component, so it needs a global selector. */
+    /* Tight desktop widths keep the wordmark by dropping "on Steam" visually. */
+    @media (max-width: 1119px) {
+      .nav__cta-long {
+        position: absolute;
+        inline-size: 1px;
+        block-size: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+    }
+    .nav__cta :global(svg) { inline-size: 1rem; block-size: 1rem; flex: none; }
     .nav__cta:hover {
       background: var(--c-gold-400);
       border-color: var(--c-gold-400);
@@ -291,7 +311,8 @@ const pathname = Astro.url.pathname;
     text-transform: uppercase;
     border-radius: var(--r-md);
   }
-  .nav__panel-cta svg { inline-size: 0.6rem; }
+  .nav__panel-cta :global(svg) { inline-size: 1.1rem; block-size: 1.1rem; }
+  .nav__panel-foot { display: grid; gap: var(--sp-5); }
 </style>
 
 <script>

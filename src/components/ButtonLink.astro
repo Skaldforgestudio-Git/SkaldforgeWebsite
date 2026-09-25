@@ -1,0 +1,25 @@
+---
+/**
+ * A `.btn` link. Off-site targets (Steam, socials) open in a new tab and say so
+ * to screen readers; an optional brand glyph sits before the label.
+ */
+import type { Action } from '../data/site';
+import SocialIcon from './SocialIcon.astro';
+
+interface Props extends Action {
+  variant?: 'primary' | 'ghost';
+}
+const { label, href, icon, variant = 'primary' } = Astro.props;
+const external = /^https?:\/\//.test(href);
+---
+
+<a
+  class:list={['btn', `btn--${variant}`, icon && 'btn--icon']}
+  href={href}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+>
+  {icon && <SocialIcon id={icon} />}
+  {label}
+  {external && <span class="visually-hidden"> (opens in a new tab)</span>}
+</a>

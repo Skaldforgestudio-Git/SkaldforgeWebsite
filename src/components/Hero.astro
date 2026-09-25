@@ -3,6 +3,8 @@ import { Image } from 'astro:assets';
 import { asset } from '../lib/url';
 import { img } from '../lib/images';
 import mythboundLogo from '../assets/brand/mythbound-logo.png';
+import ButtonLink from './ButtonLink.astro';
+import type { Action } from '../data/site';
 
 interface Props {
   /** Cinematic hero plays the trailer plate; 'still' uses a key image only. */
@@ -12,8 +14,8 @@ interface Props {
   statement: string;
   /** Rendered instead of the logo lockup on interior pages. */
   heading?: string;
-  primary?: { label: string; href: string };
-  secondary?: { label: string; href: string };
+  primary?: Action;
+  secondary?: Action;
   /** Full viewport for the homepage; shorter for interior pages. */
   size?: 'full' | 'tall';
 }
@@ -112,16 +114,8 @@ const still = img(stillId);
       {
         (primary || secondary) && (
           <div class="hero__actions">
-            {primary && (
-              <a class="btn btn--primary" href={primary.href}>
-                {primary.label}
-              </a>
-            )}
-            {secondary && (
-              <a class="btn btn--ghost" href={secondary.href}>
-                {secondary.label}
-              </a>
-            )}
+            {primary && <ButtonLink {...primary} />}
+            {secondary && <ButtonLink {...secondary} variant="ghost" />}
           </div>
         )
       }

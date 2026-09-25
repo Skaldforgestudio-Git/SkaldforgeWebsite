@@ -29,11 +29,39 @@ export const nav = [
   { label: 'Contact', href: '/contact' },
 ] as const;
 
+export type SocialId = 'steam' | 'reddit' | 'x' | 'tiktok' | 'linkedin';
+
+/** A button target used by the Hero and CTA sections. */
+export interface Action {
+  label: string;
+  href: string;
+  icon?: SocialId;
+}
+
+/** Mythbound's Steam store page. Drives every "Wishlist on Steam" button. */
+export const steam = {
+  id: 'steam' as SocialId,
+  label: 'Steam',
+  href: 'https://store.steampowered.com/app/5049770/Mythbound/',
+};
+
+export const wishlist: Action = { label: 'Wishlist on Steam', href: steam.href, icon: 'steam' };
+
 /**
  * Only links that genuinely exist may appear here.
- * No placeholder or invented social accounts. See CONTENT_TODO.md #6.
+ * No placeholder or invented social accounts. See CONTENT_TODO.md #11.
  */
-export const socials: { label: string; href: string }[] = [];
+export const socials: { id: SocialId; label: string; handle: string; href: string }[] = [
+  { id: 'reddit', label: 'Reddit', handle: 'r/Skaldforge', href: 'https://www.reddit.com/r/Skaldforge/' },
+  { id: 'x', label: 'X', handle: '@SkaldforgeMB', href: 'https://x.com/SkaldforgeMB' },
+  { id: 'tiktok', label: 'TikTok', handle: '@skaldforgestudio', href: 'https://www.tiktok.com/@skaldforgestudio' },
+  {
+    id: 'linkedin',
+    label: 'LinkedIn',
+    handle: 'Skaldforge Studio',
+    href: 'https://www.linkedin.com/in/skaldforge-studio-25bb25398/',
+  },
+];
 
 export const contact = {
   email: 'skaldforgestudio@gmail.com' as string | null,

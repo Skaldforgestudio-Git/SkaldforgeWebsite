@@ -1,0 +1,70 @@
+---
+/**
+ * Row of icon links to every studio channel. Each link carries an accessible
+ * name, so the row reads as "Skaldforge on Reddit" etc. to screen readers.
+ */
+import { socials, steam } from '../data/site';
+import SocialIcon from './SocialIcon.astro';
+
+interface Props {
+  /** Include the Steam store page at the start of the row. */
+  withSteam?: boolean;
+  align?: 'start' | 'center';
+  class?: string;
+}
+const { withSteam = false, align = 'start', class: className } = Astro.props;
+const links = withSteam ? [steam, ...socials] : socials;
+---
+
+<ul role="list" class:list={['socials', `socials--${align}`, className]}>
+  {
+    links.map((s) => (
+      <li>
+        <a
+          class="socials__link"
+          href={s.href}
+          target="_blank"
+          rel="me noopener noreferrer"
+          aria-label={s.id === 'steam' ? 'Mythbound on Steam' : `Skaldforge on ${s.label}`}
+          title={s.label}
+        >
+          <SocialIcon id={s.id} class="socials__icon" />
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+  }
+  .socials--center { justify-content: center; }
+
+  .socials__link {
+    display: grid;
+    place-items: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    color: var(--t-secondary);
+    border: 1px solid var(--s-hairline);
+    border-radius: var(--r-md);
+    background: color-mix(in oklab, var(--c-ink) 55%, transparent);
+    transition:
+      color var(--d-fast) var(--e-out),
+      border-color var(--d-fast) var(--e-out),
+      transform var(--d-fast) var(--e-out);
+  }
+  .socials__link:hover {
+    color: var(--c-gold-300);
+    border-color: var(--c-gold-400);
+    transform: translateY(-1px);
+  }
+  .socials__link :global(.socials__icon) { inline-size: 1.125rem; block-size: 1.125rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .socials__link:hover { transform: none; }
+  }
+</style>

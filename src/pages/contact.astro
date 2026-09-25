@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import { contact } from '../data/site';
+import SocialLinks from '../components/SocialLinks.astro';
 ---
 
 <Base
@@ -33,6 +34,10 @@ import { contact } from '../data/site';
             Prefer to write directly? <a href={`mailto:${contact.email}`}>{contact.email}</a>
           </p>
         )}
+        <div class="contact-page__follow">
+          <p class="contact-page__follow-label">Follow Skaldforge</p>
+          <SocialLinks withSteam />
+        </div>
       </div>
 
       <form class="contact-form reveal" id="contact-form" novalidate>
@@ -81,6 +86,19 @@ import { contact } from '../data/site';
 </script>
 
 <style>
+  .contact-page__follow {
+    display: grid;
+    gap: var(--sp-3);
+    margin-block-start: var(--sp-6);
+  }
+  .contact-page__follow-label {
+    font-size: var(--fs-eyebrow);
+    font-weight: 600;
+    letter-spacing: var(--tr-eyebrow);
+    text-transform: uppercase;
+    color: var(--c-gold-500);
+  }
+
   .contact-page {
     display: grid;
     gap: var(--sp-8);

@@ -2,13 +2,18 @@
 import { Image } from 'astro:assets';
 import Valknut from './Valknut.astro';
 import mythboundLogo from '../assets/brand/mythbound-logo.png';
+import ButtonLink from './ButtonLink.astro';
+import type { Action } from '../data/site';
+import SocialLinks from './SocialLinks.astro';
 
 interface Props {
   eyebrow?: string;
   title?: string;
   body?: string;
-  primary?: { label: string; href: string };
-  secondary?: { label: string; href: string };
+  primary?: Action;
+  secondary?: Action;
+  /** Show the studio's social channels under the actions. */
+  socials?: boolean;
   /** Show the Mythbound lockup instead of a text heading. */
   lockup?: boolean;
 }
@@ -19,6 +24,7 @@ const {
   primary,
   secondary,
   lockup = false,
+  socials = true,
 } = Astro.props;
 ---
 
@@ -49,8 +55,17 @@ const {
     {
       (primary || secondary) && (
         <div class="cta__actions">
-          {primary && <a class="btn btn--primary" href={primary.href}>{primary.label}</a>}
-          {secondary && <a class="btn btn--ghost" href={secondary.href}>{secondary.label}</a>}
+          {primary && <ButtonLink {...primary} />}
+          {secondary && <ButtonLink {...secondary} variant="ghost" />}
+        </div>
+      )
+    }
+
+    {
+      socials && (
+        <div class="cta__follow">
+          <p class="cta__follow-label">Follow the saga</p>
+          <SocialLinks align="center" />
         </div>
       )
     }
@@ -120,5 +135,19 @@ const {
     justify-content: center;
     gap: var(--sp-3);
     margin-block-start: var(--sp-2);
+  }
+
+  .cta__follow {
+    display: grid;
+    justify-items: center;
+    gap: var(--sp-3);
+    margin-block-start: var(--sp-4);
+  }
+  .cta__follow-label {
+    font-size: var(--fs-eyebrow);
+    font-weight: 600;
+    letter-spacing: var(--tr-eyebrow);
+    text-transform: uppercase;
+    color: var(--t-muted);
   }
 </style>

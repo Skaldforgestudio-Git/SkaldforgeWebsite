@@ -123,12 +123,12 @@ Michael Doctor and adds sound design and voice acting.
 
 **Action:** confirm names, spellings and titles, then set `publishRoster = true`.
 
-## 11. Social links and contact : NONE PUBLISHED
+## 11. Social links and contact : PUBLISHED
 
-`socials` is empty and `contact.email` is `null`, so the footer's "Connect"
-column and the Studio contact section do not render. No invented accounts exist.
-
-**Action:** supply real URLs and a monitored public address. `src/data/site.ts`.
+Steam store page, Reddit, X, TikTok and LinkedIn are live in `src/data/site.ts`
+(`steam`, `socials`). They appear in the nav (Wishlist on Steam), hero and
+closing CTA buttons, the footer "Connect" column, the Studio and Contact pages,
+and the Organization/VideoGame JSON-LD `sameAs`. Add new channels there only.
 
 ## 12. Release window: resolved for public copy
 

@@ -6,6 +6,7 @@ import TrailerPlayer from '../components/TrailerPlayer.astro';
 import CTA from '../components/CTA.astro';
 import { techIntro, techFeatures, toolchain, vidoc } from '../data/tech';
 import { asset, url } from '../lib/url';
+import { wishlist } from '../data/site';
 ---
 
 <Base title="Development" description="The Unreal Engine technology behind Mythbound: Gameplay Ability System, Motion Matching and competitive multiplayer." navOverlay>
@@ -64,7 +65,7 @@ import { asset, url } from '../lib/url';
   </section>}
 
   <CTA eyebrow="See the game" title="Enter the arena" body="Watch Mythbound’s movement, combat and abilities in action."
-    primary={{ label: 'Watch the trailer', href: `${url('/mythbound')}#trailer` }} secondary={{ label: 'About Skaldforge', href: url('/studio') }} />
+    primary={wishlist} secondary={{ label: 'Watch the trailer', href: `${url('/mythbound')}#trailer` }} />
 </Base>
 
 <script>

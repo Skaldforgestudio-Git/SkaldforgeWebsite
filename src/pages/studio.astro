@@ -8,7 +8,8 @@ import Valknut from '../components/Valknut.astro';
 
 import { studio, publishRoster, leadership, team } from '../data/studio';
 import { game } from '../data/game';
-import { contact, socials } from '../data/site';
+import { contact, socials, wishlist } from '../data/site';
+import SocialIcon from '../components/SocialIcon.astro';
 import { url } from '../lib/url';
 
 const roster = publishRoster ? [...leadership, ...team] : [];
@@ -129,8 +130,10 @@ const roster = publishRoster ? [...leadership, ...team] : [];
               </a>
             )}
             {socials.map((s) => (
-              <a class="btn btn--ghost" href={s.href} rel="me noopener">
+              <a class="btn btn--ghost btn--icon" href={s.href} target="_blank" rel="me noopener noreferrer">
+                <SocialIcon id={s.id} />
                 {s.label}
+                <span class="visually-hidden"> (opens in a new tab)</span>
               </a>
             ))}
           </div>
@@ -143,8 +146,9 @@ const roster = publishRoster ? [...leadership, ...team] : [];
     lockup
     eyebrow="In Alpha. Early Access Q4 2026. Release TBA."
     body="Mythbound is the first game from Skaldforge."
-    primary={{ label: 'Discover Mythbound', href: url('/mythbound') }}
-    secondary={{ label: 'Development', href: url('/technology') }}
+    primary={wishlist}
+    secondary={{ label: 'Discover Mythbound', href: url('/mythbound') }}
+    socials={false}
   />
 </Base>
 

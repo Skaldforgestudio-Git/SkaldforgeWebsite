@@ -1,8 +1,9 @@
 ---
-import { nav, site, socials, contact } from '../data/site';
+import { nav, site, socials, contact, steam } from '../data/site';
 import { game } from '../data/game';
 import { url } from '../lib/url';
 import Wordmark from './Wordmark.astro';
+import SocialIcon from './SocialIcon.astro';
 
 const year = new Date().getFullYear();
 ---
@@ -30,6 +31,11 @@ const year = new Date().getFullYear();
           <li><span>Status</span>{game.status}</li>
           <li><span>Target Window</span>Early Access Q4 2026 · Release TBA</li>
         </ul>
+        <a class="footer__steam" href={steam.href} target="_blank" rel="noopener noreferrer">
+          <SocialIcon id="steam" />
+          Wishlist on Steam
+          <span class="visually-hidden"> (opens in a new tab)</span>
+        </a>
       </div>
 
       {
@@ -39,7 +45,11 @@ const year = new Date().getFullYear();
             <ul role="list">
               {socials.map((s) => (
                 <li>
-                  <a href={s.href} rel="me noopener">{s.label}</a>
+                  <a class="footer__social" href={s.href} target="_blank" rel="me noopener noreferrer">
+                    <SocialIcon id={s.id} />
+                    {s.label}
+                    <span class="visually-hidden"> (opens in a new tab)</span>
+                  </a>
                 </li>
               ))}
               {contact.email && (
@@ -118,6 +128,35 @@ const year = new Date().getFullYear();
   }
   .footer__nav a:hover,
   .footer__col a:hover { color: var(--c-gold-300); }
+
+  .footer__social {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+  .footer__social :global(svg) { inline-size: 1rem; block-size: 1rem; flex: none; }
+
+  .footer__col .footer__steam {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3);
+    margin-block-start: var(--sp-5);
+    padding: var(--sp-2) var(--sp-4);
+    min-block-size: 44px;
+    font-size: var(--fs-eyebrow);
+    font-weight: 600;
+    letter-spacing: var(--tr-label);
+    text-transform: uppercase;
+    color: var(--c-gold-300);
+    border: 1px solid color-mix(in oklab, var(--c-gold-500) 45%, transparent);
+    border-radius: var(--r-md);
+    transition: background var(--d-mid) var(--e-out), color var(--d-mid) var(--e-out);
+  }
+  .footer__col .footer__steam:hover {
+    background: var(--c-gold-400);
+    color: var(--c-navy-900);
+  }
+  .footer__steam :global(svg) { inline-size: 1rem; block-size: 1rem; flex: none; }
 
   .footer__facts li {
     display: grid;
